@@ -3,33 +3,19 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		Scanner in = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		
-		int hour = in.nextInt();
-		int minute = in.nextInt();
-		int cookingMinute = in.nextInt();
+		int h = sc.nextInt();	// 현재 시
+		int m = sc.nextInt();	// 현재 분
+		int c = sc.nextInt();	// 요리하는데 필요한 시간 (분)
+				
+		int hm = h * 60 + m;	// 현재 시각 (분으로 변환)
+		int sum = hm + c;		// 현재 시간 + 요리 시간 (분)
 		
-		int increasedHour;
-		int increasedMinute;
-		int doneHour;
-		int doneMinute;
+		int hour = (sum / 60) % 24;
+		int min = sum % 60;
 		
-		if((minute + cookingMinute) >= 60) {
-			increasedHour = (minute + cookingMinute) / 60;
-			doneHour = hour + increasedHour;
-			
-			if(doneHour >= 24) {
-				doneHour -= 24;
-			}
-			
-			increasedMinute = cookingMinute - 60 * increasedHour;
-			doneMinute = minute + increasedMinute;
-			
-			System.out.println(doneHour + " " + doneMinute);
-		}else {
-			System.out.println(hour + " " + (minute + cookingMinute));
-		}
-		
+		System.out.println(hour + " " + min);
 	}
 	
 }
