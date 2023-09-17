@@ -1,0 +1,13 @@
+-- 코드를 입력하세요
+-- 완료된 중고 거래 인라인뷰로 하나 만들고 조인
+-- 총금액은 회원마다 글 여러개일 수 있으므로 회원아이디로 GROUP BY하고
+-- 조건으로 총금액 70만원 이상 걸기
+SELECT A.USER_ID, A.NICKNAME, B.TOTAL_SALES
+FROM USED_GOODS_USER A
+JOIN (SELECT WRITER_ID, SUM(PRICE) AS TOTAL_SALES
+      FROM USED_GOODS_BOARD 
+      WHERE STATUS = 'DONE'
+      GROUP BY WRITER_ID
+     HAVING SUM(PRICE) >= 700000) B
+ON A.USER_ID = B.WRITER_ID
+ORDER BY B.TOTAL_SALES;
